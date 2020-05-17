@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    p {
+        color: red;
+        display: none;
+    }
+</style>
+
+<body>
+        <h2>Formulario</h2>
+
+    <form action="no_name" id="formulario">
+        <label>Nombre: </label> <input type="text" id="name"/>  <p id="error_name">*Campo vacio.</p> <p id="error_name2">*El campo debe contener más de dos letras</p> <p id="error_name3">*Este campo no puede contener espacios en blanco</p>
+        <br/>
+        <label>Apellido: </label>   <input type="text" id="surname"/> <p id="error_surname">*Campo vacio.</p> <p id="error_surname2">*El campo debe contener más de dos letras</p> <p id="error_surname3">*Este campo no puede contener espacios en blanco</p>
+        <br/>
+        <label>Mail: </label>   <input type="text" id="email"/> <p id="error_email">*Campo vacio.</p> <p id="error_email2">*El campo debe contener más de dos letras</p> <p id="error_email3">*Este campo no puede contener espacios en blanco</p> <p id="error_email4">Este campo debe contener un @ y un punto</p>
+        <input type="submit" value="Enviar" id="sub"/>
+        
+    </form>
+
+    <script>
+        "use strict"
+        var formu = document.getElementById("formulario");
+        formu.onsubmit = function() {
+            var nombre = document.getElementById("name").value;
+            var error_name = document.getElementById("error_name");
+            var error_name2 = document.getElementById("error_name2");
+            var error_name3 = document.getElementById("error_name3");
+
+            var apellido = document.getElementById("surname").value;
+            var error_apellido = document.getElementById("error_surname");
+            var error_apellido2 = document.getElementById("error_surname2");
+            var error_apellido3 = document.getElementById("error_surname3");
+
+            var email = document.getElementById("email").value;
+            var error_email = document.getElementById("error_email");
+            var error_email2 = document.getElementById("error_email2");
+            var error_email3 = document.getElementById("error_email3");
+            var error_email4 = document.getElementById("error_email4");
+
+            /*LIMPIAMOS LOS CAMPOS VACIOS*/
+            error_name.style.display = "none";
+            error_surname.style.display = "none";
+            error_email.style.display = "none";
+            error_name2.style.display = "none";
+            error_surname2.style.display = "none";
+            error_email2.style.display = "none";
+            error_name3.style.display = "none";
+            error_surname3.style.display = "none";
+            error_email3.style.display = "none";
+            error_email4.style.display = "none";
+            
+            
+            
+            /*CORROBORAMOS SI ALGUN CAMPO ESTA VACIO*/
+            if (nombre.length == 0) {
+                    error_name.style.display = "block";
+                    return false;
+            }
+            if (apellido.length == 0) {
+                    error_surname.style.display = "block";
+                    return false;
+            }
+            if (email.length == 0) {
+                    error_email.style.display = "block";
+                    return false;
+            }
+
+            /*CORROBORAMOS SI ALGUN CAMPO TIENE MENOS DE 3 CARACTERES O ESPACIOS EN BLANCO */
+            if(nombre.length < 3)
+            {
+                error_name2.style.display = "block";
+                return false;
+            }
+            else{
+                var i = 0;
+                while(i < nombre.length)
+                    {
+                        if(nombre.substr(i, 1) == " ")
+                            {
+                                error_name3.style.display = "block";
+                                return false;
+                            }
+                        i = i+1;
+                    }
+            }
+        
+            if(apellido.length < 3)
+            {
+                error_surname2.style.display = "block";
+                return false;
+            }
+            else{
+                var i = 0;
+                while(i < apellido.length)
+                    {
+                        if(apellido.substr(i, 1) == " ")
+                            {
+                                error_surname3.style.display = "block";
+                                return false;
+                            }
+                        i = i+1;
+                    }
+            }
+
+            if(email.length < 3)
+            {
+                error_email2.style.display = "block";
+                return false;
+            }
+            else{
+                var i = 0;
+                while(i < email.length)
+                    {
+                        if(email.substr(i, 1) == " ")
+                            {
+                                error_email3.style.display = "block";
+                                return false;
+                            }
+                        i = i+1;
+                    }
+                
+                /* VERIFICAMOS SI EL CAMPO DE MAIL TIENE UN @ Y UN "." */
+
+                i = 0;
+                
+                var flag_arr = 0;
+                var flag_punto = 0;
+                
+                while(i < email.length)
+                    {
+                        
+                        if(email.substr(i, 1) == "@")
+                            {
+                                flag_arr = flag_arr + 1;
+                                
+                            }
+                        if(email.substr(i, 1) == ".")
+                            {
+                                flag_punto = flag_punto + 1;
+                            }
+                        i = i+1;
+                    }
+                    
+                if(flag_arr != 1 || flag_punto != 1)
+                    {
+                        error_email4.style.display = "block";
+                        return false;
+                    }
+            }
+
+            
+
+            
+
+        }
+
+
+    </script>
+</body>
+</html>
